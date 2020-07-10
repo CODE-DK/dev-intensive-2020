@@ -5,13 +5,14 @@ import java.util.*
 
 class TextMessage(
     id: String,
-    from: User,
+    from: User?,
     chat: Chat,
-    var text: String?,
-    date: Date = Date(),
-    isIncoming: Boolean = false
-): BaseMessage(id, from, chat, isIncoming, date)  {
+    isIncoming: Boolean = false,
+    date : Date = Date(),
+    var text: String?
 
-    override fun formatMessage() =
-        "${from?.firstName} ${if (isIncoming) "получил" else "отправил"} сообщение \"$text\" ${date.humanizeDiff()}"
+): BaseMessage(id, from, chat, isIncoming, date) {
+
+    override fun formatMessage(): String = "id:$id ${from?.firstName} " +
+            "${if (isIncoming) "получил" else "отправил"} сообщение \"$text\" ${date.humanizeDiff()}"
 }
